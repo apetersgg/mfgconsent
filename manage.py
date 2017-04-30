@@ -4,7 +4,7 @@ import os
 from app import create_app, db
 from app.models import User, Role, Follow, Post, Comment
 
-from flask.ext.script import Manager, Shell
+from flask.ext.script import Manager, Shell, Server
 from flask.ext.migrate import Migrate, MigrateCommand
 
 from app.scripts.views import build_users_and_posts
@@ -21,6 +21,8 @@ def make_shell_context():
 
 manager.add_command('shell', Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
+
+server = Server(host='192.168.75.1', port=8080)
 
 @manager.command
 def deploy():
