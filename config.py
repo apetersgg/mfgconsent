@@ -15,7 +15,7 @@ class Config:
         pass
 
     WTF_CSRF_ENABLED = False
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SECRET_KEY = 'Password'
     SSL_DISABLE = False
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_RECORD_QUERIES = True
@@ -23,16 +23,16 @@ class Config:
     MAIL_SERVER = 'smtp.sendgrid.net'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    MAIL_USERNAME = 'transreductionist@gmail.com'
+    MAIL_PASSWORD = 'xXsrCEsH2fHZ2'
 
-    FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
-    FLASKY_MAIL_SENDER = os.environ.get('FLASKY_MAIL_SENDER')
-    FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
-    FLASKY_POSTS_PER_PAGE = 25
-    FLASKY_FOLLOWERS_PER_PAGE = 25
-    FLASKY_COMMENTS_PER_PAGE = 25
-    FLASKY_SLOW_DB_QUERY_TIME=0.5
+    MFGCONSENT_MAIL_SUBJECT_PREFIX = '[Mfg Consent]'
+    MFGCONSENT_MAIL_SENDER = 'transreductionist@gmail.com'
+    MFGCONSENT_ADMIN = 'apeters'
+    MFGCONSENT_POSTS_PER_PAGE = 25
+    MFGCONSENT_FOLLOWERS_PER_PAGE = 25
+    MFGCONSENT_COMMENTS_PER_PAGE = 25
+    MFGCONSENT_SLOW_DB_QUERY_TIME=0.5
 
     @staticmethod
     def init_app(app):
@@ -44,18 +44,18 @@ class DevelopmentConfig(Config):
     MAIL_SERVER = 'smtp.sendgrid.net'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL')
+    MAIL_USERNAME = 'transreductionist@gmail.com'
+    MAIL_PASSWORD = 'xXsrCEsH2fHZ2'
+    SQLALCHEMY_DATABASE_URI = 'mysql://apeters:Password@192.168.75.1:3306/mfgconsent'
 
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = 'mysql://apeters:Password@192.168.75.1:3306/mfgconsent'
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = 'mysql://apeters:Password@192.168.75.1:3306/mfgconsent'
 
     @classmethod
     def init_app(cls, app):
@@ -73,9 +73,9 @@ class ProductionConfig(Config):
 
         mail_handler = SMTPHandler(
             mailhost=(cls.MAIL_SERVER, cls.MAIL_PORT),
-            fromaddr=cls.FLASKY_MAIL_SENDER,
-            toaddrs=[cls.FLASKY_ADMIN],
-            subject=cls.FLASKY_MAIL_SUBJECT_PREFIX + ' Application Error',
+            fromaddr=cls.MFGCONSENT_MAIL_SENDER,
+            toaddrs=[cls.MFGCONSENT_ADMIN],
+            subject=cls.MFGCONSENT_MAIL_SUBJECT_PREFIX + ' Application Error',
             credentials=credentials,
             secure=secure)
         mail_handler.setLevel(logging.ERROR)
